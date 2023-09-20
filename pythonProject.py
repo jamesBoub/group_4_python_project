@@ -8,7 +8,7 @@ frm.grid()
 root.title("MiniCalc")
 #------------------------------------------------------------------------------------------
 
-#represents structure of buttons displayed, written like this for aesthetics
+
 
 bigNumber = ""
 lastAns = ""
@@ -19,25 +19,41 @@ def userInput(fromButton):
     
     if isinstance(fromButton, str):
         if fromButton == "return":
-            localVal = eval(bigNumber)
-            print(localVal)
-            bigNumber = str(localVal)
-            lastAns = bigNumber
+            try:
+                localVal = eval(bigNumber)
+                print(localVal)
+                bigNumber = str(localVal)
+                lastAns = bigNumber
+            except error:
+                print("invalid")
         elif fromButton == "+" or fromButton == "-" or fromButton == "/" or fromButton == "*" or fromButton == "**":
-            bigNumber += fromButton
-            print(bigNumber)
+            try:
+                bigNumber += fromButton
+                print(bigNumber)
+            except error:
+                print("invalid")
         elif fromButton =="allClear": 
-            bigNumber = ""
+            try:
+                bigNumber = ""
+            except error:
+                print("invalid")
         elif fromButton == "clear":
-            bigNumber = bigNumber[:-1]
-            print(bigNumber)
+            try:
+                bigNumber = bigNumber[:-1]
+                print(bigNumber)
+            except:
+                print("invalid")
         elif fromButton == "ans":
-            bigNumber += lastAns
-            print(bigNumber)
+            try:
+                bigNumber += lastAns
+                print(bigNumber)
+            except error:
+                print("invalid")
     else:
         bigNumber += str(fromButton)
         print(bigNumber)
-    
+        
+#represents structure of buttons displayed, written like this for aesthetics
 ttk.Button(frm, text="1", command=lambda:userInput(1)).grid(column=1, row=0); ttk.Button(frm, text="2", command=lambda:userInput(2)).grid(column=2, row=0); ttk.Button(frm, text="+", command=lambda:userInput("+")).grid(column=3, row=0) 
 ttk.Button(frm, text="3", command=lambda:userInput(3)).grid(column=1, row=1); ttk.Button(frm, text="4", command=lambda:userInput(4)).grid(column=2, row=1); ttk.Button(frm, text="-", command=lambda:userInput("-")).grid(column=3, row=1)
 ttk.Button(frm, text="5", command=lambda:userInput(5)).grid(column=1, row=2); ttk.Button(frm, text="6", command=lambda:userInput(6)).grid(column=2, row=2); ttk.Button(frm, text="x", command=lambda:userInput("*")).grid(column=3, row=2)
